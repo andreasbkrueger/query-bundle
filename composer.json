@@ -1,5 +1,5 @@
 {
-    "name": "ABK/query-bundle",
+    "name": "abk/query-bundle",
     "description": "Generic query component that can be used to generates specific queries via custom adapter.",
     "require": {
         "php": ">=5.5.9",
