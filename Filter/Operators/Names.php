@@ -21,4 +21,6 @@ class Names
     const LOGICAL_OR = 'or';
 
     const NESTED_FILTER = 'nested_filter';
+
+    const ORDER = 'order';
 }

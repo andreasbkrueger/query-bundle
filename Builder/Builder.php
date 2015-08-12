@@ -4,8 +4,16 @@ namespace ABK\QueryBundle\Builder;
 use ABK\QueryBundle\Filter\Filter;
 use ABK\QueryBundle\Filter\FilterCollection;
 use ABK\QueryBundle\Filter\Operators\Comparison\Equal;
+use ABK\QueryBundle\Filter\Operators\Comparison\GreaterThan;
+use ABK\QueryBundle\Filter\Operators\Comparison\GreaterThanEqual;
+use ABK\QueryBundle\Filter\Operators\Comparison\Identical;
+use ABK\QueryBundle\Filter\Operators\Comparison\LessThan;
+use ABK\QueryBundle\Filter\Operators\Comparison\LessThanEqual;
+use ABK\QueryBundle\Filter\Operators\Comparison\NotEqual;
+use ABK\QueryBundle\Filter\Operators\Comparison\NotIdentical;
 use ABK\QueryBundle\Filter\Operators\Logical\LogicalAnd;
 use ABK\QueryBundle\Filter\Operators\Logical\LogicalOr;
+use ABK\QueryBundle\Filter\Operators\Presentational\Order;
 use ABK\QueryBundle\Filter\Operators\Structure\NestedFilter;
 
 class Builder
@@ -119,6 +127,48 @@ class Builder
         return $this;
     }
 
+    public function isNotEqual($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new NotEqual($field, $value));
+        return $this;
+    }
+
+    public function isGreaterThanEqual($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new GreaterThanEqual($field, $value));
+        return $this;
+    }
+
+    public function isGreaterThan($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new GreaterThan($field, $value));
+        return $this;
+    }
+
+    public function isLessThanEqual($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new LessThanEqual($field, $value));
+        return $this;
+    }
+
+    public function isLessThan($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new LessThan($field, $value));
+        return $this;
+    }
+
+    public function isIdentical($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new Identical($field, $value));
+        return $this;
+    }
+
+    public function isNotIdentical($field, $value)
+    {
+        $this->getCurrentFilter()->addOperator(new NotIdentical($field, $value));
+        return $this;
+    }
+
     public function logicalAnd()
     {
         $this->getCurrentFilter()->addOperator(new LogicalAnd());
@@ -131,6 +181,32 @@ class Builder
         return $this;
     }
 
+    public function order($field, $direction = Order::ASC)
+    {
+        $this->getQuery()->addOperator(new Order($field, $direction));
+        return $this;
+    }
+
+    /**
+     * @param int $limit
+     * @return $this
+     */
+    public function limit($limit)
+    {
+        $this->getQuery()->setLimit($limit);
+        return $this;
+    }
+
+    /**
+     * @param int $offset
+     * @return $this
+     */
+    public function offset($offset)
+    {
+        $this->getQuery()->setOffset($offset);
+        return $this;
+    }
+
     public function end()
     {
         if ($this->currentFilter instanceof Filter) {
@@ -139,6 +215,14 @@ class Builder
             $this->currentFilter = $this->currentFilter->getParent();
         }
         return $this;
+    }
+
+    /**
+     * @return Filter
+     */
+    public function getQuery()
+    {
+        return $this->query;
     }
 
     /**

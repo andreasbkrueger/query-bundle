@@ -68,4 +68,24 @@ class FilterTest extends \PHPUnit_Framework_TestCase
         $this->subject->setName($testName);
         $this->assertEquals($testName, $this->subject->getName());
     }
+
+    public function testSetLimit()
+    {
+        $this->subject = new Filter();
+        $this->assertSame(null, $this->subject->getLimit(), 'init limit should ne null');
+        $this->subject->setLimit(10);
+        $this->assertSame(10, $this->subject->getLimit(), 'set limit correctly');
+        $this->subject->setLimit('string value');
+        $this->assertSame(0, $this->subject->getLimit(), 'every value is converted to int values');
+    }
+
+    public function testSetOffset()
+    {
+        $this->subject = new Filter();
+        $this->assertSame(null, $this->subject->getOffset(), 'init offset should ne null');
+        $this->subject->setOffset(10);
+        $this->assertSame(10, $this->subject->getOffset(), 'set offset correctly');
+        $this->subject->setOffset('string value');
+        $this->assertSame(0, $this->subject->getOffset(), 'every value is converted to int values');
+    }
 }

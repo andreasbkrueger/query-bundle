@@ -10,4 +10,5 @@ class Types
     const COMPARISON = 'comparison';
     const LOGICAL = 'logical';
     const STRUCTURE = 'structure';
+    const PRESENTATIONAL = 'presentational';
 }
