@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant build file for frontend project. -->
+
+<project name="QueryBuilder" default="build" basedir=".">
+
+    <!-- default environment can be overridden on cli for exp.: ant build -Denvironment=integration -->
+    <property name="environment" value="dev" />
+
+
+    <!-- include build targets for automated testing. -->
+    <include file="${basedir}/build/ant/test.xml"/>
+
+    <!-- include build targets for static quality statistics. -->
+    <include file="${basedir}/build/ant/quality.xml"/>
+
+    <!-- include build targets to manage vendor libraries. -->
+    <include file="${basedir}/build/ant/vendor.xml"/>
+
+    <target name="build" depends="
+        vendor.composer-install,
+        vendor.install-dist,
+        test.phpunit
+    "/>
+
+    <target name="quality" depends="
+        quality.phpcs,
+        quality.phpmd
+    "/>
+
+</project>

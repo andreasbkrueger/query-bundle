@@ -1,0 +1,26 @@
+# ignore project specific files
+
+vendor
+composer.phar
+composer.lock
+
+# ignore mac meta files
+._*
+.DS_Store
+
+# ignore intelliJ meta files
+*.iml
+
+# ignore swap files
+*~
+
+# ignore Windows Thumbs
+Thumbs.db
+
+# ignore ide
+/nbproject
+/.idea
+.vagrant/
+/.buildpath
+/.project
+/.settings
