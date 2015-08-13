@@ -19,7 +19,8 @@ class Factory
             'not_identical',
             'less_than',
             'less_than_equal',
-            'range'
+            'range',
+            'contain'
         )
     );
 

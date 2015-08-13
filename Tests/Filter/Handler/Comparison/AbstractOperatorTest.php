@@ -28,6 +28,7 @@ abstract class AbstractOperatorHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $this->subject = $this->getTestSubject();
         $this->operatorMock->expects($this->any())->method('getValue')->will($this->returnValue($valueToTestWith));
+
         $result = $this->subject->doesMatch($valueToTestOn);
         if ($expectedResult === true) {
             $this->assertTrue($result, $errorMessage);

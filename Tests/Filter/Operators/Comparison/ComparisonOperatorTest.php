@@ -7,6 +7,7 @@ namespace ABK\QueryBundle\Tests\Filter\Operators\Comparison;
 
 
 use ABK\QueryBundle\Filter\Operators\Comparison\ComparisonOperatorInterface;
+use ABK\QueryBundle\Filter\Operators\Comparison\Contain;
 use ABK\QueryBundle\Filter\Operators\Comparison\Equal;
 use ABK\QueryBundle\Filter\Operators\Comparison\GreaterThan;
 use ABK\QueryBundle\Filter\Operators\Comparison\GreaterThanEqual;
@@ -67,6 +68,21 @@ class ComparisonOperationTest extends \PHPUnit_Framework_TestCase
         $this->makeDefaultAssertions($operator, 'range');
     }
 
+    public function testContainsOperatorBehavior()
+    {
+        $operator = new Contain($this->testField, $this->testValue);
+        $this->assertFalse(
+            $operator->isCaseSensitive(),
+            'case sensitive is false by default'
+        );
+
+        $operator = new Contain($this->testField, $this->testValue, true);
+        $this->assertTrue(
+            $operator->isCaseSensitive(),
+            'case sensitive can be set to true'
+        );
+    }
+
     public function makeDefaultAssertions($operator, $name)
     {
         $this->assertEquals(
@@ -99,6 +115,7 @@ class ComparisonOperationTest extends \PHPUnit_Framework_TestCase
             array('LessThanEqual', Names::LESS_THAN_EQUAL),
             array('NotEqual', Names::NOT_EQUAL),
             array('NotIdentical', Names::NOT_IDENTICAL),
+            array('Contain', Names::CONTAIN),
         );
     }
 }

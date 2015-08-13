@@ -16,6 +16,7 @@ class Names
     const LESS_THAN = 'less_than';
     const LESS_THAN_EQUAL = 'less_than_equal';
     const RANGE = 'range';
+    const CONTAIN = 'contain';
 
     const LOGICAL_AND = 'and';
     const LOGICAL_OR = 'or';

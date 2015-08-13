@@ -76,6 +76,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array('isEqual', array('', 1), Names::EQUAL),
+            array('shouldContain', array('', 1), Names::CONTAIN),
             array('isNotEqual', array('', 1), Names::NOT_EQUAL),
             array('isIdentical', array('', 1), Names::IDENTICAL),
             array('isNotIdentical', array('', 1), Names::NOT_IDENTICAL),
@@ -103,6 +104,8 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
                 ->isGreaterThan('testField', 'value')
                 ->logicalAnd()
                 ->isLessThan('testField', 'value')
+                ->logicalOr()
+                ->shouldContain('testField', 'value')
             ->end()
         ->end();
 
@@ -119,5 +122,7 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Names::GREATER_THAN, $nestedOperators[0]->getName());
         $this->assertEquals(Names::LOGICAL_AND, $nestedOperators[1]->getName());
         $this->assertEquals(Names::LESS_THAN, $nestedOperators[2]->getName());
+        $this->assertEquals(Names::LOGICAL_OR, $nestedOperators[3]->getName());
+        $this->assertEquals(Names::CONTAIN, $nestedOperators[4]->getName());
     }
 }

@@ -3,6 +3,7 @@ namespace ABK\QueryBundle\Builder;
 
 use ABK\QueryBundle\Filter\Filter;
 use ABK\QueryBundle\Filter\FilterCollection;
+use ABK\QueryBundle\Filter\Operators\Comparison\Contain;
 use ABK\QueryBundle\Filter\Operators\Comparison\Equal;
 use ABK\QueryBundle\Filter\Operators\Comparison\GreaterThan;
 use ABK\QueryBundle\Filter\Operators\Comparison\GreaterThanEqual;
@@ -124,6 +125,12 @@ class Builder
     public function isEqual($field, $value)
     {
         $this->getCurrentFilter()->addOperator(new Equal($field, $value));
+        return $this;
+    }
+
+    public function shouldContain($field, $value, $caseSensitive = false)
+    {
+        $this->getCurrentFilter()->addOperator(new Contain($field, $value, $caseSensitive));
         return $this;
     }
 
